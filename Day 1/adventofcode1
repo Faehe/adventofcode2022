@@ -1,0 +1,61 @@
+inventory = open ('puzzleinput.txt', 'r').read().split('\n\n')
+
+for x in range(len(inventory)):
+    inventory[x] = inventory[x].splitlines()
+
+# name of array = content is the txt, which will be read and split into array by inventory
+# (/n/n -> split when empty line/2 times enter)
+
+for x in range(len(inventory)):
+    #starting a for lööp, x is counter variable for arrays
+    #will lööp through all arrays once
+    
+    if (len(inventory[x])) > 1:
+        #if list is longer than 1 item do stuff
+        while len(inventory[x]) > 1:
+            item1 = inventory[x][0]
+            item2 = inventory[x][1]
+            #defining which item is which inside an array
+            #current_list = inventory[x]
+            #current_element = current_list[0]
+            
+            inventory[x][0] = int(item1) + int(item2)
+            inventory[x].pop(1)
+            #adding both items to each other, replacing item 1 with the value, using float to convert strings into numbers
+            #until only item1 remains
+            
+    else:
+        #when list has only one item stop doing stuff
+        for y in range(len(inventory[x])):
+            item1 = inventory[x][0]
+            inventory[x][0] = int(item1)
+#now all arrays should only consist of one item, containing the combined value of calories in each elves inventory
+
+elfnumber = int(1)
+#just making sure which elf to start with and that the value is 1 in numbers, when counting which elf we at
+#obv we start with the first elf
+elfcounter = int(0)
+#to make sure which elf we at later, for reasons I want it in numbers
+
+for x in inventory:
+    #trusty x counter variable again, because lööp before has been hopefully finished by this line
+    
+    elfcounter +=1
+    #first lööp, first elf
+    
+    if inventory[0]>inventory[1]:
+        inventory.pop(1)
+        elfnumber = elfcounter
+        #sets elfnumber to current amount of lööp
+        #so we remember at which elf we're at
+        #since we only lööp through array 0 and 1 until only 0 is left
+    else:
+        inventory.pop(0)
+        elfnumber +=1
+        #now keeping in mind that we're in the next elfs inventory
+        #pop works like remove and deletes one item of the inventory
+        #so array 1 becomes the new array 0, right?
+        
+    #now only the biggest amount of calories remains    
+
+print('The Elf number',elfcounter,' has the biggest calorie inventory, with a combined amount of',inventory[0],' calories. WTF dude?!')
